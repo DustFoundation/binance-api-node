@@ -1217,6 +1217,12 @@ declare module 'binance-api-node' {
     commissionAsset: string
   }
 
+  export interface ShortOrder {
+    symbol: string
+    orderId: number
+    clientOrderId: string
+  }
+
   export interface Order {
     clientOrderId: string
     cummulativeQuoteQty: string
@@ -1295,7 +1301,7 @@ declare module 'binance-api-node' {
     listClientOrderId: string
     transactionTime: number
     symbol: string
-    orders: Order[]
+    orders: ShortOrder[]
     orderReports: Order[]
   }
 
@@ -1582,17 +1588,13 @@ declare module 'binance-api-node' {
     eventTime: number
     symbol: string
     orderListId: number
-    contingencyType: 'OCO' | string
+    contingencyType: OcoOrderType.CONTINGENCY_TYPE
     listStatusType: ListStatusType_LT
     listOrderStatus: ListOrderStatus_LT
     listRejectReason: 'NONE' | string
     listClientOrderId: string
     transactionTime: number
-    orders: Array<{
-        symbol: string
-        orderId: number
-        clientOrderId: string
-    }>
+    orders: ShortOrder[]
   }
 
   export interface ExecutionReport {
